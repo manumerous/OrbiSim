@@ -7,6 +7,7 @@ int main()
     sf::RectangleShape player(sf::Vector2f(100,100));
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::White);
+    player.setOrigin(50.f,50.f);
 
     while (window.isOpen())
     {
@@ -31,24 +32,30 @@ int main()
             }
         }
 
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-        {
-            player.move(-0.1f,0.0f);
-        }
+        // if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+        // {
+        //     player.move(-0.1f,0.0f);
+        // }
 
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-        {
-            player.move(0.0f,0.1f);
-        }
+        // if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+        // {
+        //     player.move(0.0f,0.1f);
+        // }
 
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-        {
-            player.move(0.1f,0.0f);
-        }
+        // if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+        // {
+        //     player.move(0.1f,0.0f);
+        // }
 
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+        // if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+        // {
+        //     player.move(0.0f,-0.1f);
+        // }
+
+        if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
-            player.move(0.0f,-0.1f);
+            sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+            player.setPosition(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
         }
 
         window.clear();
