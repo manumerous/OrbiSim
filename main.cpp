@@ -3,10 +3,10 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(1920, 1080), "OrbiSim: Orbital Simulator!");
-    
+    sf::RenderWindow window(sf::VideoMode(1920, 1080), "OrbiSim: Orbital Simulator!");  
+    sf::RectangleShape player(sf::Vector2f(100,100));
     sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Black);
+    shape.setFillColor(sf::Color::White);
 
     while (window.isOpen())
     {
@@ -22,17 +22,38 @@ int main()
                 // std::cout << "New Window Size: " << evnt.size.width << ", " << evnt.size.height << std::endl;
                 printf("New window size: %i, %i\n", evnt.size.width, evnt.size.height);
                 break;
-            case sf::Event::TextEntered:
-                if(evnt.text.unicode < 128)
-                {
-                    printf("%c", evnt.text.unicode);
-                }
+            // case sf::Event::TextEntered:
+                // if(evnt.text.unicode < 128)
+                // {
+                //     printf("%c", evnt.text.unicode);
+                // }
                     
             }
         }
 
-        window.clear(sf::Color::White);
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+        {
+            player.move(-0.1f,0.0f);
+        }
+
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+        {
+            player.move(0.0f,0.1f);
+        }
+
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+        {
+            player.move(0.1f,0.0f);
+        }
+
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+        {
+            player.move(0.0f,-0.1f);
+        }
+
+        window.clear();
         window.draw(shape);
+        window.draw(player);
         window.display();
     }
 
