@@ -20,7 +20,10 @@ include_directories(${SFML_INCLUDE_DIR})
 add_executable("${PROJECT_NAME}" main.cpp) 
 
 target_link_libraries("${PROJECT_NAME}"
+    sfml-system
+    sfml-window
     sfml-graphics 
+    sfml-audio
     # sfml-audio 
     # sfml-network
     # imgui
