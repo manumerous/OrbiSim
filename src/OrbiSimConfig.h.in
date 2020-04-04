@@ -1,0 +1,3 @@
+// the configured options and settings for OrbiSim
+#define OrbiSim_VERSION_MAJOR @OrbiSim_VERSION_MAJOR@
+#define OrbiSim_VERSION_MINOR @OrbiSim_VERSION_MINOR@

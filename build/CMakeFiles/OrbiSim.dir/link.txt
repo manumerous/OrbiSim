@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/OrbiSim.dir/main.cpp.o  -o OrbiSim  -lsfml-graphics 

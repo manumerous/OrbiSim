@@ -1,0 +1,3 @@
+/home/manu/Documents/github/orbital_simulator/build/CMakeFiles/rebuild_cache.dir
+/home/manu/Documents/github/orbital_simulator/build/CMakeFiles/OrbiSim.dir
+/home/manu/Documents/github/orbital_simulator/build/CMakeFiles/edit_cache.dir
