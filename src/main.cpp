@@ -1,23 +1,27 @@
 #include <SFML/Graphics.hpp>
-#include "FixedCelestialBody.hpp"
+#include "CelestialBody.hpp"
 #include <iostream>
+
+using namespace std;
+
+sf::RenderWindow window(sf::VideoMode(1200, 1200), "OrbiSim: Orbital Simulator!");
+
+void drawCO(CelestialBody body)
+{
+
+    window.draw(body.shape);
+}
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(1920, 1080), "OrbiSim: Orbital Simulator!");  
-    sf::CircleShape player(50.f);
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::White);
-    player.setOrigin(50.f,50.f);
-
-    FixedCelestialBody testbody(50.0);
+    CelestialBody testbody(50.0f, 25.0f);
 
     while (window.isOpen())
     {
         sf::Event evnt;
         while (window.pollEvent(evnt))
         {
-            switch(evnt.type)
+            switch (evnt.type)
             {
             case sf::Event::Closed:
                 window.close();
@@ -26,19 +30,17 @@ int main()
                 // std::cout << "New Window Size: " << evnt.size.width << ", " << evnt.size.height << std::endl;
                 printf("New window size: %i, %i\n", evnt.size.width, evnt.size.height);
                 break;
-                    
             }
         }
 
-        if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
-            sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-            player.setPosition(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
+            float mousePos[dimensionality] = {static_cast<float>(sf::Mouse::getPosition(window).x), static_cast<float>(sf::Mouse::getPosition(window).y)};
+            testbody.setPosition(mousePos);
         }
 
         window.clear();
-        window.draw(shape);
-        window.draw(player);
+        drawCO(testbody);
         window.display();
     }
 
