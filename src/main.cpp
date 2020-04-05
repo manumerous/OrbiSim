@@ -1,13 +1,16 @@
 #include <SFML/Graphics.hpp>
+#include "FixedCelestialBody.hpp"
 #include <iostream>
 
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "OrbiSim: Orbital Simulator!");  
-    sf::RectangleShape player(sf::Vector2f(100,100));
+    sf::CircleShape player(50.f);
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::White);
     player.setOrigin(50.f,50.f);
+
+    FixedCelestialBody testbody(50.0);
 
     while (window.isOpen())
     {
@@ -23,34 +26,9 @@ int main()
                 // std::cout << "New Window Size: " << evnt.size.width << ", " << evnt.size.height << std::endl;
                 printf("New window size: %i, %i\n", evnt.size.width, evnt.size.height);
                 break;
-            // case sf::Event::TextEntered:
-                // if(evnt.text.unicode < 128)
-                // {
-                //     printf("%c", evnt.text.unicode);
-                // }
                     
             }
         }
-
-        // if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-        // {
-        //     player.move(-0.1f,0.0f);
-        // }
-
-        // if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-        // {
-        //     player.move(0.0f,0.1f);
-        // }
-
-        // if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-        // {
-        //     player.move(0.1f,0.0f);
-        // }
-
-        // if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
-        // {
-        //     player.move(0.0f,-0.1f);
-        // }
 
         if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
