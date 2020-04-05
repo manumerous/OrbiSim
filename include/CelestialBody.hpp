@@ -1,29 +1,27 @@
 #include <SFML/Graphics.hpp>
 
-const int dimensionality = 2;
+#define dimensionality 2
 
-    class CelestialBody {
-    public:
+class CelestialBody
+{
+private:
+    //Private Attributes:
 
-        //Public Attributes:
-        sf::CircleShape shape;
+    //Private Methods:
+public:
+    //Public Attributes:
+    sf::CircleShape shape;
 
-        float pos[dimensionality];
-        float vel[dimensionality];
-        float acc[dimensionality];
+    float pos[dimensionality];
+    float vel[dimensionality];
+    float acc[dimensionality];
 
-        //Public Methods:
-        void setPosition(float new_pos[dimensionality]);
+    float mass;
+    float radius;
 
-        //Constructor
-        CelestialBody(float bodyMass, float bodyRadius);
+    //Public Methods:
+    void setPosition(float new_pos[dimensionality]);
 
-    private:
-
-        //Private Attributes:
-        float mass;
-        float radius;
-
-        //Private Methods:
-
+    //Constructor
+    CelestialBody(float bodyMass, float bodyRadius);
 };

@@ -1,7 +1,20 @@
 #include "MovingCelestialBody.hpp"
 #include <SFML/Graphics.hpp>
 
-MovingCelestialBody::MovingCelestialBody()
+void MovingCelestialBody::applyForce(float force[dimensionality])
 {
+    for (int i = 0; i < dimensionality; i++)
+    {
+        acc[i] = force[i]/mass;;
+        vel[i] += acc[i]*0.01;
+        pos[i] += vel[i]*0.01;
+    }
+    setPosition(pos);
     
+}
+
+MovingCelestialBody::MovingCelestialBody(float bodyMass=50.0f, float bodyRadius=50.0f):
+CelestialBody{bodyMass, bodyRadius}
+{
+
 }

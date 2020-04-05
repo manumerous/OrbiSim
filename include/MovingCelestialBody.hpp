@@ -4,23 +4,17 @@
 
 class MovingCelestialBody : public CelestialBody
 {
-    public:
+private:
+    //Private Attributes:
 
-        //Public Attributes:
+    //Private Methods:
 
-        //Public Methods:
-        void applyForce(float force)
+public:
+    //Public Attributes:
 
-        //Constructor
-        MovingCelestialBody();
+    //Public Methods:
+    void applyForce(float force[dimensionality]);
 
-    private:
-
-        //Private Attributes:
-
-        float mass;
-        float radius;
-
-        //Private Methods:
-
-}
+    //Constructor
+    MovingCelestialBody(float bodyMass = 50.0f, float bodyRadius = 50.0f);
+};
