@@ -15,20 +15,29 @@ using namespace std;
 // Gravitational Constant in N*m^2/kg^2
 float G = 6.67430f * pow(10.0f, -11.0f);
 
+float euclidianDist(float pos1[dimensionality], float pos2[dimensionality])
+{
+    float absSum = 0;
+    for (int i = 0; i < dimensionality; i++)
+    {
+        absSum += (pos1[i]-pos2[i]) * (pos1[i]-pos2[i]);
+    }  
+    float abs = sqrt(absSum);
+    return abs;
+}
+
 void calculate_force(MovingCelestialBody body1, CelestialBody body2, float (&force)[dimensionality])
 {
     float r[dimensionality];
-    float abs_r = 0;
+    float abs = euclidianDist(body2.pos, body1.pos);
     for (int i = 0; i < dimensionality; i++)
     {
         r[i] = body2.pos[i] - body1.pos[i];
-        abs_r = r[i] * r[i];
     }
-    abs_r = sqrt(abs_r);
-    float force_magnitude = (G*body1.mass*body2.mass)/(abs_r*abs_r);
+    float force_magnitude = (G*body1.mass*body2.mass)/(abs*abs);
     for (int i = 0; i < dimensionality; i++)
     {
-        force[i] = r[i]*force_magnitude/abs_r;
+        force[i] = r[i]*force_magnitude/abs;
     }
 }
 
@@ -36,7 +45,7 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode(1200, 1200), "OrbiSim: Orbital Simulator!");
 
-    CelestialBody fixedBody(5000000000000.0f, 25.0f);
+    CelestialBody fixedBody(50000000000.0f, 25.0f);
     float initialpos_fixed[] = {600.0f, 600.f};
     fixedBody.setPosition(initialpos_fixed);
 
