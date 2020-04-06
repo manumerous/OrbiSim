@@ -1,5 +1,7 @@
 #include <SFML/Graphics.hpp>
 
+#pragma once
+
 #define dimensionality 2
 
 class CelestialBody
@@ -23,5 +25,5 @@ public:
     void setPosition(float new_pos[dimensionality]);
 
     //Constructor
-    CelestialBody(float bodyMass, float bodyRadius);
+    CelestialBody(float bodyMass=50.0f, float bodyRadius=50.0f);
 };

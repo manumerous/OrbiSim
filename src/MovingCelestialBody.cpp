@@ -13,7 +13,7 @@ void MovingCelestialBody::applyForce(float force[dimensionality])
     
 }
 
-MovingCelestialBody::MovingCelestialBody(float bodyMass=50.0f, float bodyRadius=50.0f):
+MovingCelestialBody::MovingCelestialBody(float bodyMass, float bodyRadius):
 CelestialBody{bodyMass, bodyRadius}
 {
 

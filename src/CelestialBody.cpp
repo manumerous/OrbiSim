@@ -15,7 +15,7 @@ void CelestialBody::setPosition(float new_pos[dimensionality])
     }
 }
 
-CelestialBody::CelestialBody(float bodyMass=50.0f, float bodyRadius=50.0f):
+CelestialBody::CelestialBody(float bodyMass, float bodyRadius):
     mass(bodyMass),
     shape(bodyRadius),
     radius(bodyRadius),

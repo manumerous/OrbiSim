@@ -2,6 +2,8 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 
+#pragma once
+
 class MovingCelestialBody : public CelestialBody
 {
 private:
@@ -16,5 +18,5 @@ public:
     void applyForce(float force[dimensionality]);
 
     //Constructor
-    MovingCelestialBody(float bodyMass = 50.0f, float bodyRadius = 50.0f);
+    MovingCelestialBody(float bodyMass=50.0f, float bodyRadius=50.0f);
 };
