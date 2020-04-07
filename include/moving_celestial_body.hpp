@@ -1,4 +1,4 @@
-#include "CelestialBody.hpp"
+#include "celestial_body.hpp"
 #include <SFML/Graphics.hpp>
 #include <vector>
 

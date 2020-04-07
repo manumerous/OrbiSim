@@ -18,7 +18,7 @@ find_package(SFML 2.4 REQUIRED system window graphics audio)
 include_directories(${SFML_INCLUDE_DIR})
 
 # add the executable
-add_executable("${PROJECT_NAME}" ./src/main.cpp ./src/CelestialBody.cpp ./src/MovingCelestialBody.cpp) 
+add_executable("${PROJECT_NAME}" ./src/main.cpp ./src/celestial_body.cpp ./src/moving_celestial_body.cpp) 
 
 target_link_libraries("${PROJECT_NAME}"
     sfml-system

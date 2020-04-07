@@ -12,14 +12,14 @@ private:
     //Private Methods:
 public:
     //Public Attributes:
-    sf::CircleShape shape;
+    sf::CircleShape shape_;
 
-    float pos[dimensionality];
-    float vel[dimensionality];
-    float acc[dimensionality];
+    float pos_[dimensionality];
+    float vel_[dimensionality];
+    float acc_[dimensionality];
 
-    float mass;
-    float radius;
+    float mass_;
+    float radius_;
 
     //Public Methods:
     void setPosition(float new_pos[dimensionality]);
