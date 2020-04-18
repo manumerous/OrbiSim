@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "celestial_body.hpp"
-#include "moving_celestial_body.hpp"
+#include "Eigen/Dense"
 #include <iostream>
 #include <math.h>
 
@@ -10,52 +10,27 @@
 #include <unistd.h>
 #endif
 
+using namespace Eigen;
 using namespace std;
-
-// Gravitational Constant in N*m^2/kg^2
-float G = 6.67430f * pow(10.0f, -11.0f);
-
-float calculate_euclidian_dist(float pos1[dimensionality], float pos2[dimensionality])
-{
-    float absSum = 0;
-    for (int i = 0; i < dimensionality; i++)
-    {
-        absSum += (pos1[i]-pos2[i]) * (pos1[i]-pos2[i]);
-    }  
-    float abs = sqrt(absSum);
-    return abs;
-}
-
-void calculate_force(MovingCelestialBody body1, CelestialBody body2, float (&force)[dimensionality])
-{
-    float r[dimensionality];
-    float abs = calculate_euclidian_dist(body2.pos_, body1.pos_);
-    for (int i = 0; i < dimensionality; i++)
-    {
-        r[i] = body2.pos_[i] - body1.pos_[i];
-    }
-    float force_magnitude = (G*body1.mass_*body2.mass_)/(abs*abs);
-    for (int i = 0; i < dimensionality; i++)
-    {
-        force[i] = r[i]*force_magnitude/abs;
-    }
-}
 
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1200, 1200), "OrbiSim: Orbital Simulator!");
 
+    CelestialBody all_bodies[2];
+
     CelestialBody fixed_body(50000000000.0f, 25.0f);
-    float initialpos_fixed[] = {600.0f, 600.f};
+    Vector3d initialpos_fixed(600.0f, 600.0, 0);
     fixed_body.setPosition(initialpos_fixed);
+    all_bodies[1] = fixed_body;
 
-    MovingCelestialBody moving_body(5.0f, 10.0f);
-    float initialpos_moving[] = {200.0f, 200.f};
+    CelestialBody moving_body(5.0f, 10.0f);
+    Vector3d initialpos_moving(200.0f, 200.f, 0.0);
     moving_body.setPosition(initialpos_moving);
+    all_bodies[2] = moving_body;
 
-    float force[]={0.1,0.1};
-
-    cout << G << std::endl;
+    Vector3d mouse_pos(0, 0, 0);
+    float time_step = 0.1;
 
     while (window.isOpen())
     {
@@ -76,15 +51,14 @@ int main()
 
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
-            float mousePos[dimensionality] = {static_cast<float>(sf::Mouse::getPosition(window).x), static_cast<float>(sf::Mouse::getPosition(window).y)};
-            fixed_body.setPosition(mousePos);
+            mouse_pos(0) = static_cast<double>(sf::Mouse::getPosition(window).x);
+            mouse_pos(1) = static_cast<double>(sf::Mouse::getPosition(window).y);
+            fixed_body.setPosition(mouse_pos);
         }
 
-        
-        calculate_force(moving_body, fixed_body, force);
-        moving_body.applyForce(force);
+        moving_body.updateVelocity(all_bodies, time_step);
+        moving_body.updatePosition(time_step);
 
-        std::cout << "Force applying on body: (" << force[0] << ", " << force[1] << ")" << std::endl;
         std::cout << "New Position of body: (" << moving_body.pos_[0] << ", " << moving_body.pos_[1] << ")" << std::endl;
         window.clear();
         window.draw(fixed_body.shape_);
