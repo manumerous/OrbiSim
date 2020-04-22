@@ -22,12 +22,12 @@ int main()
     CelestialBody fixed_body(50000000000.0f, 25.0f);
     Vector3d initialpos_fixed(600.0f, 600.0, 0);
     fixed_body.setPosition(initialpos_fixed);
-    all_bodies[1] = fixed_body;
+    all_bodies[0] = fixed_body;
 
     CelestialBody moving_body(5.0f, 10.0f);
     Vector3d initialpos_moving(200.0f, 200.f, 0.0);
     moving_body.setPosition(initialpos_moving);
-    all_bodies[2] = moving_body;
+    all_bodies[1] = moving_body;
 
     Vector3d mouse_pos(0, 0, 0);
     float time_step = 0.1;
@@ -58,6 +58,9 @@ int main()
 
         moving_body.updateVelocity(all_bodies, time_step);
         moving_body.updatePosition(time_step);
+
+        all_bodies[0] = fixed_body;
+        all_bodies[1] = moving_body;
 
         std::cout << "New Position of body: (" << moving_body.pos_[0] << ", " << moving_body.pos_[1] << ")" << std::endl;
         window.clear();

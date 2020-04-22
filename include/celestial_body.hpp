@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "Eigen/Dense"
+#include <iostream>
 
 #pragma once
 
@@ -23,9 +24,9 @@ public:
     float radius_;
 
     //Public Methods:
-    void setPosition(const Vector3d new_pos);
-    void updateVelocity(const CelestialBody all_bodies[], const float time_step);
-    void updatePosition(const float time_step);
+    void setPosition(Vector3d new_pos);
+    void updateVelocity(CelestialBody all_bodies[], float time_step);
+    void updatePosition(float time_step);
 
     //Constructor
     CelestialBody(float bodyMass=50.0f, float bodyRadius=50.0f);
