@@ -25,7 +25,7 @@ public:
 
     //Public Methods:
     void setPosition(Vector3d new_pos);
-    void updateVelocity(CelestialBody all_bodies[], float time_step);
+    void updateVelocity(CelestialBody *all_bodies[], int body_count, float time_step);
     void updatePosition(float time_step);
 
     //Constructor
