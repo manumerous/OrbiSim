@@ -18,7 +18,7 @@ int main()
     sf::RenderWindow window(sf::VideoMode(1200, 1200), "OrbiSim: Orbital Simulator!");
 
     const int body_count = 3;
-    CelestialBody *all_bodies[body_count];
+    const CelestialBody *all_bodies[body_count];
 
     CelestialBody fixed_body(50000000000.0f, 25.0f);
     Vector3d initialpos_fixed(600.0f, 600.0, 0);

@@ -16,7 +16,7 @@ void CelestialBody::setPosition(Vector3d new_pos)
     shape_.setPosition(sf::Vector2f(pos_(0), pos_(1)));
 }
 
-void CelestialBody::updateVelocity(CelestialBody *all_bodies[], int body_count, float time_step)
+void CelestialBody::updateVelocity(const CelestialBody *all_bodies[], int body_count, float time_step)
 {
     std::cout << body_count << endl;
     Vector3d force(0, 0, 0);
