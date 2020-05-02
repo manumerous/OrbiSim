@@ -1,0 +1,29 @@
+name: Build Tests
+
+on:
+  push:
+    branches:
+    - 'master'
+  pull_request:
+    branches:
+    - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ubuntu_release: [
+          bionic,
+          focal
+          ]
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install SFML library
+      run: sudo apt update && sudo apt install libsfml-dev
+    - name: Setup CMake build folder
+      run: mkdir -p build && cd build && cmake ..
+    - name: Build
+      run: make
+      working-directory: build
+
