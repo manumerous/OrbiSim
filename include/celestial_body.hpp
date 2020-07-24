@@ -4,8 +4,6 @@
 
 #pragma once
 
-using namespace Eigen;
-
 class CelestialBody
 {
 private:
@@ -16,15 +14,15 @@ public:
     //Public Attributes:
     sf::CircleShape shape_;
 
-    Vector3d pos_;
-    Vector3d vel_;
-    Vector3d acc_;
+    Eigen::Vector3d pos_;
+    Eigen::Vector3d vel_;
+    Eigen::Vector3d acc_;
 
     float mass_;
     float radius_;
 
     //Public Methods:
-    void setPosition(Vector3d new_pos);
+    void setPosition(Eigen::Vector3d new_pos);
     void updateVelocity(const CelestialBody *all_bodies[], int body_count, float time_step);
     void updatePosition(float time_step);
 
