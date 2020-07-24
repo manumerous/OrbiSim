@@ -9,7 +9,7 @@ project(OrbiSim VERSION 1.0) # set the project name
 #                            )
 
 # include files
-include_directories( ./include ./src)
+include_directories( ./include ./include/eigen-3.3.7 ./src)
 
 # find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
 # detect and add sfml
@@ -18,7 +18,7 @@ find_package(SFML 2.4 REQUIRED system window graphics audio)
 include_directories(${SFML_INCLUDE_DIR})
 
 # add the executable
-add_executable("${PROJECT_NAME}" ./src/main.cpp ./src/celestial_body.cpp ./src/moving_celestial_body.cpp) 
+add_executable("${PROJECT_NAME}" ./src/main.cpp ./src/celestial_body.cpp) 
 
 target_link_libraries("${PROJECT_NAME}"
     sfml-system
