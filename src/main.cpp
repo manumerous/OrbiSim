@@ -10,8 +10,6 @@
 #include <unistd.h>
 #endif
 
-// using namespace Eigen;
-
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1200, 1200), "OrbiSim: Orbital Simulator!");
