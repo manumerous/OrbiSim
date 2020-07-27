@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "Eigen/Dense"
+#include <eigen3/Eigen/Dense>
 #include <iostream>
 #include "celestial_body.hpp"
 

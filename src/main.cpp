@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "celestial_body.hpp"
-#include "Eigen/Dense"
+#include <eigen3/Eigen/Dense>
 #include <iostream>
 #include <math.h>
 
