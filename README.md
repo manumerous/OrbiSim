@@ -1,6 +1,6 @@
 # OrbiSim
 
-Orbital Dynamics Simulation using c++. The application was developed on Ubuntu 18.04.4 LTS
+A simple C++ Application to simulate and visualize orbital dynamics of planets, rockets and more. Currently it only simmulates the dynamics in 2 dimensions, but this might change in the furture. The build chain is set up for Linux Debian Systems. 
 
 ### Dependencies:
 sfml 2.4.2  
