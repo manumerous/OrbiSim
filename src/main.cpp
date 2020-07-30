@@ -3,6 +3,7 @@
 #include <eigen3/Eigen/Dense>
 #include <iostream>
 #include <math.h>
+#include <time.h>
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -35,8 +36,14 @@ int main()
     Eigen::Vector3d mouse_pos(0, 0, 0);
     float time_step = 0.1;
 
+    float delta_t = 0;
+    clock_t t_loop_start = 0;
+    float time_factor = 1000;
+
     while (window.isOpen())
     {
+        t_loop_start = clock();
+        
         sf::Event evnt;
         while (window.pollEvent(evnt))
         {
@@ -58,21 +65,23 @@ int main()
             fixed_body.setPosition(mouse_pos);
         }
 
-        moving_body.updateVelocity(all_bodies, body_count, time_step);
-        moving_body2.updateVelocity(all_bodies, body_count, time_step);
-        moving_body.updatePosition(time_step);
-        moving_body2.updatePosition(time_step);
+        moving_body.updateVelocity(all_bodies, body_count, delta_t);
+        moving_body2.updateVelocity(all_bodies, body_count, delta_t);
+        moving_body.updatePosition(delta_t);
+        moving_body2.updatePosition(delta_t);
 
 
-        std::cout << "New Position of body: (" << moving_body.pos_[0] << ", " << moving_body.pos_[1] << ")" << std::endl;
-        std::cout << "New Position of body2: (" << moving_body2.pos_[0] << ", " << moving_body2.pos_[1] << ")" << std::endl;
+        // std::cout << "New Position of body: (" << moving_body.pos_[0] << ", " << moving_body.pos_[1] << ")" << std::endl;
+        // std::cout << "New Position of body2: (" << moving_body2.pos_[0] << ", " << moving_body2.pos_[1] << ")" << std::endl;
         window.clear();
         window.draw(fixed_body.shape_);
         window.draw(moving_body.shape_);
         window.draw(moving_body2.shape_);
         window.display();
 
-        sleep(0.1);
+        // usleep(1000);
+        delta_t =  time_factor*(float)(clock() - t_loop_start)/CLOCKS_PER_SEC;
+        std::cout << "delta_t [s]:" << delta_t << std::endl;
     }
 
     return 0;

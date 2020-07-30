@@ -14,7 +14,6 @@ void CelestialBody::setPosition(Eigen::Vector3d new_pos)
 
 void CelestialBody::updateVelocity(const CelestialBody *all_bodies[], int body_count, float time_step)
 {
-    std::cout << body_count << std::endl;
     Eigen::Vector3d force(0, 0, 0);
     for (int i = 0; i < body_count; i++)
     {
@@ -22,7 +21,6 @@ void CelestialBody::updateVelocity(const CelestialBody *all_bodies[], int body_c
         CelestialBody other_body = *all_bodies[i];
         if (all_bodies[i] != this)
         {
-            std::cout << i << std::endl;
             Eigen::Vector3d r = other_body.pos_ - pos_;
             Eigen::Vector3d r_unit = r / (r.norm());
             force = force + r_unit * (G * other_body.mass_ * mass_) / (r.norm() * r.norm());
