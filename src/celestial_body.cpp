@@ -17,7 +17,7 @@ void CelestialBody::updateVelocity(const CelestialBody *all_bodies[], int body_c
     Eigen::Vector3d force(0, 0, 0);
     for (int i = 0; i < body_count; i++)
     {
-        
+
         CelestialBody other_body = *all_bodies[i];
         if (all_bodies[i] != this)
         {
@@ -28,12 +28,41 @@ void CelestialBody::updateVelocity(const CelestialBody *all_bodies[], int body_c
     }
     acc_ = force / mass_;
     vel_ = vel_ + acc_ * time_step;
+
+    acc_predict_[0] = acc_;
+    vel_predict_[0] = vel_;
 }
 
 void CelestialBody::updatePosition(float time_step)
 {
     pos_ += vel_ * time_step;
     shape_.setPosition(sf::Vector2f(pos_(0), pos_(1)));
+    pos_predict_[0] = pos_;
+}
+
+void CelestialBody::predictOrbit(const CelestialBody *all_bodies[], int body_count, float time_step)
+{
+    Eigen::Vector3d current_pos;
+    position_collector_[0] = sf::Vector2f(pos_(0), pos_(1));
+    for (int k = 0; k <= (horizon_length_ - 1); k++)
+    {
+        Eigen::Vector3d force(0, 0, 0);
+        for (int i = 0; i < body_count; i++)
+        {
+            CelestialBody other_body = *all_bodies[i];
+            if (all_bodies[i] != this)
+            {
+                Eigen::Vector3d r = other_body.pos_predict_[k] - pos_predict_[k];
+                Eigen::Vector3d r_unit = r / (r.norm());
+                force = force + r_unit * (G * other_body.mass_ * mass_) / (r.norm() * r.norm());
+            }
+        }
+        acc_predict_[k + 1] = force / mass_;
+        vel_predict_[k + 1] = vel_predict_[k] + acc_predict_[k + 1] * time_step;
+        pos_predict_[k + 1] = pos_predict_[k] + vel_predict_[k + 1] * time_step;
+        current_pos = pos_predict_[k + 1];
+        position_collector_[k + 1] = sf::Vector2f(current_pos(0), current_pos(1));
+    }
 }
 
 CelestialBody::CelestialBody(float bodyMass, float bodyRadius) : mass_(bodyMass),

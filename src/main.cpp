@@ -11,6 +11,18 @@
 #include <unistd.h>
 #endif
 
+void drawDottedLine(sf::Vector2f *position_list, sf::RenderWindow window)
+{
+    sf::CircleShape dot;
+    dot.setRadius(2);
+    dot.setOutlineColor(sf::Color::Red);
+    for (int i; i <= sizeof(position_list) / sizeof(position_list[0]); i++)
+    {
+        dot.setPosition(position_list[i]);
+        window.draw(dot);
+    }
+}
+
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1200, 1200), "OrbiSim: Orbital Simulator!");
@@ -43,7 +55,7 @@ int main()
     while (window.isOpen())
     {
         t_loop_start = clock();
-        
+
         sf::Event evnt;
         while (window.pollEvent(evnt))
         {
@@ -63,25 +75,29 @@ int main()
             mouse_pos(0) = static_cast<double>(sf::Mouse::getPosition(window).x);
             mouse_pos(1) = static_cast<double>(sf::Mouse::getPosition(window).y);
             fixed_body.setPosition(mouse_pos);
+
+            moving_body.predictOrbit(all_bodies, body_count, delta_t*10);
+            moving_body2.predictOrbit(all_bodies, body_count, delta_t*10);
         }
 
-        moving_body.updateVelocity(all_bodies, body_count, delta_t);
-        moving_body2.updateVelocity(all_bodies, body_count, delta_t);
-        moving_body.updatePosition(delta_t);
-        moving_body2.updatePosition(delta_t);
+        else
+        {
+            moving_body.updateVelocity(all_bodies, body_count, delta_t);
+            moving_body2.updateVelocity(all_bodies, body_count, delta_t);
+            moving_body.updatePosition(delta_t);
+            moving_body2.updatePosition(delta_t);
+        }
 
-
-        // std::cout << "New Position of body: (" << moving_body.pos_[0] << ", " << moving_body.pos_[1] << ")" << std::endl;
-        // std::cout << "New Position of body2: (" << moving_body2.pos_[0] << ", " << moving_body2.pos_[1] << ")" << std::endl;
+        std::cout << "New Position of body: (" << moving_body.pos_[0] << ", " << moving_body.pos_[1] << ")" << std::endl;
+        std::cout << "New Position of body2: (" << moving_body2.pos_[0] << ", " << moving_body2.pos_[1] << ")" << std::endl;
         window.clear();
         window.draw(fixed_body.shape_);
         window.draw(moving_body.shape_);
         window.draw(moving_body2.shape_);
         window.display();
 
-        // usleep(1000);
-        delta_t =  time_factor*(float)(clock() - t_loop_start)/CLOCKS_PER_SEC;
-        std::cout << "delta_t [s]:" << delta_t << std::endl;
+        delta_t = time_factor * (float)(clock() - t_loop_start) / CLOCKS_PER_SEC;
+        // std::cout << "delta_t [s]:" << delta_t << std::endl;
     }
 
     return 0;
