@@ -12,9 +12,9 @@
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
-            "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
+            "environment": [ {"name" : "DISPLAY", "value": ":0"}],
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",

@@ -57,6 +57,7 @@
         "iomanip": "cpp",
         "mutex": "cpp",
         "thread": "cpp",
-        "cinttypes": "cpp"
+        "cinttypes": "cpp",
+        "bit": "cpp"
     }
 }

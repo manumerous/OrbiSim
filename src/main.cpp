@@ -76,8 +76,10 @@ int main()
             mouse_pos(1) = static_cast<double>(sf::Mouse::getPosition(window).y);
             fixed_body.setPosition(mouse_pos);
 
-            moving_body.predictOrbit(all_bodies, body_count, delta_t*10);
-            moving_body2.predictOrbit(all_bodies, body_count, delta_t*10);
+            moving_body.predictOrbit(all_bodies, body_count, delta_t * 10);
+            moving_body2.predictOrbit(all_bodies, body_count, delta_t * 10);
+
+            // drawDottedLine(moving_body.predicted_positions, window);
         }
 
         else
@@ -86,10 +88,10 @@ int main()
             moving_body2.updateVelocity(all_bodies, body_count, delta_t);
             moving_body.updatePosition(delta_t);
             moving_body2.updatePosition(delta_t);
+            std::cout << "New Position of body: (" << moving_body.pos_[0] << ", " << moving_body.pos_[1] << ")" << std::endl;
+            std::cout << "New Position of body2: (" << moving_body2.pos_[0] << ", " << moving_body2.pos_[1] << ")" << std::endl;
         }
 
-        std::cout << "New Position of body: (" << moving_body.pos_[0] << ", " << moving_body.pos_[1] << ")" << std::endl;
-        std::cout << "New Position of body2: (" << moving_body2.pos_[0] << ", " << moving_body2.pos_[1] << ")" << std::endl;
         window.clear();
         window.draw(fixed_body.shape_);
         window.draw(moving_body.shape_);
